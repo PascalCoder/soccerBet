@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">SoccerBet</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="sign_up_link">Need to Sign Up? Click Here</string>
+    <string name="sign_up">Need to Sign Up? Click Here</string>
+    <string name="sign_up_title">Join SoccerBet and have fun placing bets!</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="email_text">Email</string>
+    <string name="confirm_password_text">Confirm Password</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="my_account_menu">My Account</string>
+    <string name="sign_out_menu">Sign Out</string>
+    <string name="settings_menu">Settings</string>
+    <string name="refresh_menu">Refresh</string>
+    <string name="homepage_prompt_msg">Select a League and Start Betting!</string>
+    <string name="sign_out_text">Sign out</string>
+    <string name="la_liga_text">LA LIGA</string>
+    <string name="premier_league_text">PREMIER LEAGUE</string>
+    <string name="bundesliga_text">BUNDESLIGA</string>
+    <string name="serie_a_text">SERIE A</string>
+    <string name="my_bets_menu">My Bets</string>
+    <string name="forgot_password_text">
+        <u>Forgot Password?</u>
+    </string>
+    <string name="provide_email_text">Provide Email</string>
+    <string name="reset_password_text">Reset Password</string>
+    <string name="username_text">Username</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="testing_inline_valid">This password must contain capital letters, lower caps, numbers and special
+        chars
+    </string>
+    <string name="position_header">Pos.</string>
+    <string name="team_header">Team</string>
+    <string name="points_header">Points</string>
+    <string name="differential_header">Diff.</string>
+    <string name="minus_sign">-</string>
+    <string name="match_day">Match Day:</string>
+    <string name="bet">Bet?</string>
+    <string name="_0">0</string>
+    <string name="submit_bet">Submit Bet</string>
+    <string name="bet_instruction">Choose a score for each team and click on submit to register your bet.</string>
+    <string name="update_bet_text">Update Bet</string>
+    <string name="sign_in_header">Enter your credentials to sign in!</string>
+</resources>

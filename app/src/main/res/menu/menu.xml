@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/myBets"
+        app:showAsAction="always"
+        android:title="@string/my_bets_menu"
+        android:orderInCategory="100" />
+    <item
+        android:id="@+id/myAccount"
+        app:showAsAction="ifRoom"
+        android:title="@string/my_account_menu"
+        android:orderInCategory="200" />
+    <item
+        android:id="@+id/logout"
+        app:showAsAction="ifRoom"
+        android:title="@string/sign_out_menu"
+        android:orderInCategory="300" />
+    <item
+        android:id="@+id/settings"
+        app:showAsAction="never"
+        android:title="@string/settings_menu"
+        android:orderInCategory="400" />
+    <item
+        android:id="@+id/refresh"
+        app:showAsAction="never"
+        android:title="@string/refresh_menu"
+        android:orderInCategory="500" />
+
+</menu>

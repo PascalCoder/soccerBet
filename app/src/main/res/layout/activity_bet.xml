@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#552a6d50"
+    tools:context=".view.activities.BetActivity">
+
+    <include
+        android:id="@+id/betToolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvBetInstruction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/bet_instruction"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@id/betGuidelineStart"
+        app:layout_constraintEnd_toStartOf="@id/betGuidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/betToolbar"/>
+
+    <TextView
+        android:id="@+id/tvBetHomeTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="100dp"
+        android:textSize="30sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toEndOf="@id/betGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/tvBetInstruction"
+        tools:text="Manchester City"/>
+
+    <EditText
+        android:id="@+id/etBetHomeTeamScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="30sp"
+        android:text="@string/_0"
+        android:hint="@null"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@id/betGuidelineEnd"
+        app:layout_constraintTop_toTopOf="@id/tvBetHomeTeam"
+        app:layout_constraintBottom_toBottomOf="@id/tvBetHomeTeam"/>
+
+    <TextView
+        android:id="@+id/tvBetDivider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minus_sign"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/etBetHomeTeamScore"
+        app:layout_constraintTop_toTopOf="@id/etBetHomeTeamScore"
+        app:layout_constraintBottom_toBottomOf="@id/etBetHomeTeamScore"/>
+
+    <TextView
+        android:id="@+id/tvBetAwayTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:textSize="30sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toEndOf="@id/betGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/tvBetHomeTeam"
+        tools:text="Manchester United"/>
+
+    <EditText
+        android:id="@+id/etBetAwayTeamScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="30sp"
+        android:text="@string/_0"
+        android:hint="@null"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@id/betGuidelineEnd"
+        app:layout_constraintTop_toTopOf="@id/tvBetAwayTeam"
+        app:layout_constraintBottom_toBottomOf="@id/tvBetAwayTeam"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/ButtonStyle"
+        android:background="@drawable/rounded_button_shape"
+        android:id="@+id/btnSubmitBet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_bet"
+        android:textAllCaps="false"
+        android:layout_marginTop="75dp"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/tvBetAwayTeam"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/betGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="30dp"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/betGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="30dp"/>
+
+</android.support.constraint.ConstraintLayout>
