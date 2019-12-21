@@ -3,6 +3,7 @@ package com.thepascal.soccerstats.constants
 object LaLiga {
 
     const val LIGA = "liga"
+    const val LIGA_TITLE = "LA LIGA"
 
     const val REAL_MADRID = "real_madrid"
     const val REAL_MADRID_ID = "fw3ok0fty95tz0ydspi2g5yzghm5exdj"

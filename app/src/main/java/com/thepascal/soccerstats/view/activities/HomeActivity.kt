@@ -12,12 +12,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.thepascal.soccerstats.Leagues
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.router.Router
+import com.thepascal.soccerstats.router.RouterContract
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var firebaseAuth: FirebaseAuth
     private var user: FirebaseUser? = null
+
+    //Using router for the navigation between Activities to
+    //satisfy the separation of concern
+    private val router: RouterContract by lazy { Router() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +38,22 @@ class HomeActivity : AppCompatActivity() {
         }
 
         cvLaLiga.setOnClickListener {
-            getLeagueStandings(Leagues.LIGA, it.context)
+            getLeagueStandings(it.context, Leagues.LIGA)
         }
         cvPremierLeague.setOnClickListener {
-            getLeagueStandings(Leagues.PREMIER_LEAGUE, it.context)
+            getLeagueStandings(it.context, Leagues.PREMIER_LEAGUE)
         }
         cvBundesliga.setOnClickListener {
-            getLeagueStandings(Leagues.BUNDESLIGA, it.context)
+            getLeagueStandings(it.context, Leagues.BUNDESLIGA)
         }
         cvSerieA.setOnClickListener {
-            getLeagueStandings(Leagues.SERIE_A, it.context)
+            getLeagueStandings(it.context, Leagues.SERIE_A)
         }
     }
 
-    private fun getLeagueStandings(league: String, context: Context){
-        startActivity(Intent(context, StandingsActivity::class.java).putExtra("league", league))
+    private fun getLeagueStandings(context: Context, league: String){
+        //startActivity(Intent(context, StandingsActivity::class.java).putExtra("league", league))
+        router.goToStandingsView(context, league)
     }
 
     override fun onStart() {
@@ -58,7 +65,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun logOutUser(){
         firebaseAuth.signOut()
-        startActivity(Intent(this, SignInActivity::class.java))
+        //startActivity(Intent(this, SignInActivity::class.java))
+        router.goToSignInView(this@HomeActivity)
         finish()
     }
 
@@ -78,8 +86,8 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.logout ->{
                 logOutUser()
-                startActivity(Intent(this, SignInActivity::class.java))
-                finish()
+                /*startActivity(Intent(this, SignInActivity::class.java))
+                finish()*/
             }
             R.id.settings -> {
                 Toast.makeText(this, "Working on this functionality", Toast.LENGTH_SHORT).show()

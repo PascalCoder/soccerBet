@@ -8,11 +8,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.thepascal.soccerstats.R
 import com.thepascal.soccerstats.isValidEmail
+import com.thepascal.soccerstats.router.Router
+import com.thepascal.soccerstats.router.RouterContract
 import kotlinx.android.synthetic.main.activity_password_reset.*
 
 class PasswordResetActivity : AppCompatActivity() {
 
     lateinit var firebaseAuth: FirebaseAuth
+
+    //Using router for the navigation between Activities to
+    //satisfy the separation of concern
+    private val router: RouterContract by lazy { Router() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,8 @@ class PasswordResetActivity : AppCompatActivity() {
                             Toast.makeText(this@PasswordResetActivity,
                                 "A recovery link has been sent to your email.",
                                 Toast.LENGTH_LONG).show()
-                            startActivity(Intent(this@PasswordResetActivity, SignInActivity::class.java))
+                            //startActivity(Intent(this@PasswordResetActivity, SignInActivity::class.java))
+                            router.goToSignInView(this@PasswordResetActivity)
                             finish()
                         }else{
                             Toast.makeText(this@PasswordResetActivity,

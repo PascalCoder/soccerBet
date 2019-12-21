@@ -3,6 +3,7 @@ package com.thepascal.soccerstats.constants
 object SerieA {
 
     const val SERIE_A = "serie-a"
+    const val SERIE_A_TITLE = "SERIE A"
 
     const val INTER = "inter"
     const val INTER_ID = "691f5aae875365927e918fe8cdf59de2"

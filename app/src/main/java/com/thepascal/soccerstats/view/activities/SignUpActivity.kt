@@ -1,6 +1,5 @@
 package com.thepascal.soccerstats.view.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,8 @@ import com.thepascal.soccerstats.SignUpListener
 import com.thepascal.soccerstats.data.Gamer
 import com.thepascal.soccerstats.isValidEmail
 import com.thepascal.soccerstats.isValidPassword
+import com.thepascal.soccerstats.router.Router
+import com.thepascal.soccerstats.router.RouterContract
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity(), SignUpListener {
@@ -19,6 +20,10 @@ class SignUpActivity : AppCompatActivity(), SignUpListener {
     private lateinit var firebaseAuth: FirebaseAuth
     private var firebaseUser: FirebaseUser? = null
     private var errorMessage: String = ""
+
+    //Using router for the navigation between Activities to
+    //satisfy the separation of concern
+    private val router: RouterContract by lazy { Router() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +45,8 @@ class SignUpActivity : AppCompatActivity(), SignUpListener {
                         if (it.isSuccessful) {
                             onSuccessfulSignUp()
                             finish()
-                            startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
+                            //startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
+                            router.goToSignInView(this@SignUpActivity)
                         } else {
                             onFailedSignUp(
                                 etEmailSU.editText?.text.toString(),

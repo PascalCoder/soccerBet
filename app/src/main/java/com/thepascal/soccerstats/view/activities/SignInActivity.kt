@@ -25,6 +25,9 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
     private lateinit var signInPresenter: SignInPresenter
     private lateinit var firebaseAuth: FirebaseAuth
     private var user: FirebaseUser? = null
+
+    //Using router for the navigation between Activities to
+    //satisfy the separation of concern
     private val router: RouterContract by lazy { Router() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +46,9 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
                 Toast.makeText(this@SignInActivity, "Link clicked", Toast.LENGTH_LONG).show()
-                val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
-                startActivity(intent)
+                /*val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
+                startActivity(intent)*/
+                router.goToSignUpView(this@SignInActivity)
             }
         }
 
@@ -72,7 +76,8 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
         }
 
         tvForgotPassword.setOnClickListener {
-            startActivity(Intent(this@SignInActivity, PasswordResetActivity::class.java))
+            //startActivity(Intent(this@SignInActivity, PasswordResetActivity::class.java))
+            router.goToPasswordResetView(this@SignInActivity)
             //finish()
         }
 
@@ -83,7 +88,8 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
         user = firebaseAuth.currentUser
 
         if (isUserLoggedIn(user)) {
-            startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+            //startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+            router.goToHomeView(this@SignInActivity)
             finish()
         }
 
@@ -112,7 +118,8 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login was successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+                    //startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+                    router.goToHomeView(this@SignInActivity)
                     finish() //added not tested
                 } else Toast.makeText(this, "Could not log in user", Toast.LENGTH_SHORT).show()
             }
@@ -125,7 +132,8 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
     override fun onSuccess() {
         Toast.makeText(this, "Signing in", Toast.LENGTH_LONG).show()
         print("User: $user")
-        startActivity(Intent(this, HomeActivity::class.java)) //use router
+        //startActivity(Intent(this, HomeActivity::class.java)) //use router
+        router.goToHomeView(this@SignInActivity)
         finish()
     }
 

@@ -3,6 +3,7 @@ package com.thepascal.soccerstats.constants
 object PremierLeague {
 
     const val PREMIER_LEAGUE = "premier-league"
+    const val PREMIER_LEAGUE_TITLE = "PREMIER LEAGUE"
 
     const val ARSENAL = "arsenal"
     const val ARSENAL_ID = "zymx5xdh4knl5dwbcfv3kszge9d8brnw"
