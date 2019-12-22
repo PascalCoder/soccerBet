@@ -3,15 +3,17 @@ package com.thepascal.soccerstats.view.activities
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.constants.LeaguesConstants.BET_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.BET_ID_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.GAMER_PATH_STRING
+import com.thepascal.soccerstats.constants.LeaguesConstants.LEAGUE_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.MATCH_EXTRA
 import com.thepascal.soccerstats.data.Bet
-import com.thepascal.soccerstats.data.Gamer
 import com.thepascal.soccerstats.data.Match
 import kotlinx.android.synthetic.main.activity_bet.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class BetActivity : ActivityWithMenu() {
 
@@ -20,7 +22,7 @@ class BetActivity : ActivityWithMenu() {
 
     //lateinit var firebaseAuth: FirebaseAuth
     private var firebaseUser: FirebaseUser? = null
-    lateinit var databaseReference: DatabaseReference
+    private lateinit var databaseReference: DatabaseReference
 
     private val mBets: MutableList<Bet> = mutableListOf()
 
@@ -42,9 +44,9 @@ class BetActivity : ActivityWithMenu() {
         //getting the intent
         val intent = intent
 
-        if (intent.hasExtra("betId")) {
+        if (intent.hasExtra(BET_ID_EXTRA)) {
             title = "Edit Bet"
-            bet = intent.getParcelableExtra("bet")
+            bet = intent.getParcelableExtra(BET_EXTRA)
             tvBetHomeTeam.text = bet.homeTeam
             tvBetAwayTeam.text = bet.awayTeam
             etBetHomeTeamScore.setText(bet.homeScore)
@@ -52,8 +54,8 @@ class BetActivity : ActivityWithMenu() {
 
             btnSubmitBet.text = getString(R.string.update_bet_text)
         } else {
-            val match: Match = intent.getParcelableExtra("match")
-            league = intent.getStringExtra("league")
+            val match: Match = intent.getParcelableExtra(MATCH_EXTRA)
+            league = intent.getStringExtra(LEAGUE_EXTRA)
 
             bet = Bet()
             bet.matchId = match.identifier
@@ -92,18 +94,18 @@ class BetActivity : ActivityWithMenu() {
         //bet.id = firebaseUser?.providerId
         //bet.id = firebaseUser?.uid?.substring(0, 4)
 
-        val key: String? = databaseReference.child("Gamer").push().key
+        val key: String? = databaseReference.child(GAMER_PATH_STRING).push().key //GAMER_PATH_STRING
         bet.id = key
 
         //bets.add(Bet(firebaseUser?.uid, ))
         key?.let {
-            databaseReference.child("Gamer").child(it).setValue(bet)
+            databaseReference.child(GAMER_PATH_STRING).child(it).setValue(bet)
         }
     }
 
     private fun retrieveBets() {
         val rootReference: DatabaseReference = FirebaseDatabase.getInstance().getReference(firebaseAuth.uid!!)
-        val betReference: DatabaseReference = rootReference.child("Gamer")
+        val betReference: DatabaseReference = rootReference.child(GAMER_PATH_STRING)
             .child(rootReference.key!!)
         val betListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -125,7 +127,7 @@ class BetActivity : ActivityWithMenu() {
 
     fun isBetAlreadyPlaced(betList: List<Bet>, bet: Bet): Boolean {
         for (i in betList.indices) {
-            if (betList[i].equals(bet)) {
+            if (betList[i] == (bet)) {
                 return true
             }
         }

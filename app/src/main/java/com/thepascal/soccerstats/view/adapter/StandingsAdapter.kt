@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.constants.LeaguesConstants.ID_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.LEAGUE_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.TEAM_EXTRA
 import com.thepascal.soccerstats.data.StandingList
 import com.thepascal.soccerstats.data.StandingsData
 import com.thepascal.soccerstats.view.activities.StandingsActivity
@@ -78,9 +81,9 @@ class StandingsAdapter(standingsData: StandingsData) :
             context = itemView.context
             cardView.setOnClickListener {
                 val intent = Intent(itemView.context, TeamStatsActivity::class.java)
-                intent.putExtra("id", itemView.tvId.text.toString())
-                intent.putExtra("team", itemView.tvTeamName.text.toString())
-                intent.putExtra("league", StandingsActivity.league)
+                intent.putExtra(ID_EXTRA, itemView.tvId.text.toString())
+                intent.putExtra(TEAM_EXTRA, itemView.tvTeamName.text.toString())
+                intent.putExtra(LEAGUE_EXTRA, StandingsActivity.league)
 
                 context.startActivity(intent)
             }

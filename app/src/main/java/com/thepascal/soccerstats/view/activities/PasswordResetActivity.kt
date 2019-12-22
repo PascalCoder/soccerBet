@@ -1,6 +1,5 @@
 package com.thepascal.soccerstats.view.activities
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
@@ -14,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_password_reset.*
 
 class PasswordResetActivity : AppCompatActivity() {
 
-    lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
 
     //Using router for the navigation between Activities to
     //satisfy the separation of concern
@@ -49,7 +48,6 @@ class PasswordResetActivity : AppCompatActivity() {
                             Toast.makeText(this@PasswordResetActivity,
                                 "A recovery link has been sent to your email.",
                                 Toast.LENGTH_LONG).show()
-                            //startActivity(Intent(this@PasswordResetActivity, SignInActivity::class.java))
                             router.goToSignInView(this@PasswordResetActivity)
                             finish()
                         }else{

@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.thepascal.soccerstats.R
 import com.thepascal.soccerstats.SignUpListener
+import com.thepascal.soccerstats.constants.LeaguesConstants.GAMER_PATH_STRING
 import com.thepascal.soccerstats.data.Gamer
 import com.thepascal.soccerstats.isValidEmail
 import com.thepascal.soccerstats.isValidPassword
@@ -45,7 +46,6 @@ class SignUpActivity : AppCompatActivity(), SignUpListener {
                         if (it.isSuccessful) {
                             onSuccessfulSignUp()
                             finish()
-                            //startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
                             router.goToSignInView(this@SignUpActivity)
                         } else {
                             onFailedSignUp(
@@ -102,7 +102,7 @@ class SignUpActivity : AppCompatActivity(), SignUpListener {
                     currentPoints = 0
                         )
         //bets.add(Bet(firebaseUser?.uid, ))
-        databaseReference.child("Gamer").setValue(gamer)
+        databaseReference.child(GAMER_PATH_STRING).setValue(gamer)
     }
 
     override fun onSuccessfulSignUp() {

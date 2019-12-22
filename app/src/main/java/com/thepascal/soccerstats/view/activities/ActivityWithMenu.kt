@@ -1,6 +1,5 @@
 package com.thepascal.soccerstats.view.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,11 +9,17 @@ import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.router.Router
+import com.thepascal.soccerstats.router.RouterContract
 
 open class ActivityWithMenu : AppCompatActivity() {
 
     lateinit var firebaseAuth: FirebaseAuth
     private var user: FirebaseUser? = null
+
+    //Using router for the navigation between Activities to
+    //satisfy the separation of concern
+    private val router: RouterContract by lazy { Router() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +35,7 @@ open class ActivityWithMenu : AppCompatActivity() {
 
     private fun logOutUser() {
         firebaseAuth.signOut()
-        startActivity(Intent(this, SignInActivity::class.java))
+        router.goToSignInView(this)
         finish()
     }
 
@@ -50,8 +55,6 @@ open class ActivityWithMenu : AppCompatActivity() {
             }
             R.id.logout -> {
                 logOutUser()
-                startActivity(Intent(this, SignInActivity::class.java))
-                finish()
             }
             R.id.settings -> {
                 Toast.makeText(this, "Working on this functionality", Toast.LENGTH_SHORT).show()

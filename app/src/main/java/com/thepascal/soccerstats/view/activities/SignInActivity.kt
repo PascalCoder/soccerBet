@@ -1,6 +1,5 @@
 package com.thepascal.soccerstats.view.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -10,7 +9,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.thepascal.soccerstats.Contract
@@ -76,7 +74,6 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
         }
 
         tvForgotPassword.setOnClickListener {
-            //startActivity(Intent(this@SignInActivity, PasswordResetActivity::class.java))
             router.goToPasswordResetView(this@SignInActivity)
             //finish()
         }
@@ -88,7 +85,6 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
         user = firebaseAuth.currentUser
 
         if (isUserLoggedIn(user)) {
-            //startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
             router.goToHomeView(this@SignInActivity)
             finish()
         }
@@ -118,7 +114,6 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Login was successful", Toast.LENGTH_SHORT).show()
-                    //startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
                     router.goToHomeView(this@SignInActivity)
                     finish() //added not tested
                 } else Toast.makeText(this, "Could not log in user", Toast.LENGTH_SHORT).show()
@@ -132,7 +127,6 @@ class SignInActivity : AppCompatActivity(), Contract.SignInView {
     override fun onSuccess() {
         Toast.makeText(this, "Signing in", Toast.LENGTH_LONG).show()
         print("User: $user")
-        //startActivity(Intent(this, HomeActivity::class.java)) //use router
         router.goToHomeView(this@SignInActivity)
         finish()
     }

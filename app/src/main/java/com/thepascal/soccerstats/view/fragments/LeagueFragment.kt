@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.thepascal.soccerstats.Leagues
 
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.constants.LeaguesConstants.CURRENT_SEASON
+import com.thepascal.soccerstats.constants.LeaguesConstants.LEAGUE_EXTRA
 import com.thepascal.soccerstats.data.RetrofitHelper
 import com.thepascal.soccerstats.data.StandingsData
 import com.thepascal.soccerstats.view.adapter.StandingsAdapter
@@ -43,7 +45,7 @@ class LeagueFragment : Fragment() {
         RetrofitHelper.initializeRetrofit()
         recyclerView = rootView.leagueRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        league = arguments?.getString("league")
+        league = arguments?.getString(LEAGUE_EXTRA)
 
         getLeagueStandings()
 
@@ -56,7 +58,7 @@ class LeagueFragment : Fragment() {
     }
 
     private fun getLeagueStandings() {
-        RetrofitHelper.soccerApi?.getStandings(league, Leagues.CURRENT_SEASON)
+        RetrofitHelper.soccerApi?.getStandings(league, CURRENT_SEASON)
             ?.enqueue(object : Callback<StandingsData> {
 
                 override fun onResponse(call: Call<StandingsData>, response: Response<StandingsData>) {

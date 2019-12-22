@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thepascal.soccerstats.Leagues
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.constants.LeaguesConstants.ID_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.TEAM_EXTRA
 import com.thepascal.soccerstats.data.MatchData
 import com.thepascal.soccerstats.data.RetrofitHelper
 import com.thepascal.soccerstats.view.adapter.TeamStatsAdapter
@@ -27,8 +29,8 @@ class TeamStatsActivity : ActivityWithMenu() {
         setUpToolbar(toolbar = teamStatsToolbar as Toolbar)
 
         val mIntent = intent
-        teamId = mIntent.getStringExtra("id")
-        tvName.text = mIntent.getStringExtra("team")
+        teamId = mIntent.getStringExtra(ID_EXTRA)
+        tvName.text = mIntent.getStringExtra(TEAM_EXTRA)
 
         RetrofitHelper.initializeRetrofit()
         teamStatsRecyclerView.layoutManager = LinearLayoutManager(this)

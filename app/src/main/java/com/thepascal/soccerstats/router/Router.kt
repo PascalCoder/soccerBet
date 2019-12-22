@@ -2,6 +2,7 @@ package com.thepascal.soccerstats.router
 
 import android.content.Context
 import android.content.Intent
+import com.thepascal.soccerstats.constants.LeaguesConstants.LEAGUE_EXTRA
 import com.thepascal.soccerstats.view.activities.*
 
 class Router : RouterContract {
@@ -22,6 +23,6 @@ class Router : RouterContract {
     }
 
     override fun goToStandingsView(context: Context, league: String) {
-        context.startActivity(Intent(context, StandingsActivity::class.java).putExtra("league", league))
+        context.startActivity(Intent(context, StandingsActivity::class.java).putExtra(LEAGUE_EXTRA, league))
     }
 }

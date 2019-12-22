@@ -1,7 +1,6 @@
 package com.thepascal.soccerstats.view.activities
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,15 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.thepascal.soccerstats.Leagues
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.constants.Bundesliga.BUNDESLIGA
+import com.thepascal.soccerstats.constants.LaLiga.LIGA
+import com.thepascal.soccerstats.constants.PremierLeague.PREMIER_LEAGUE
+import com.thepascal.soccerstats.constants.SerieA.SERIE_A
 import com.thepascal.soccerstats.router.Router
 import com.thepascal.soccerstats.router.RouterContract
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
     private var user: FirebaseUser? = null
 
     //Using router for the navigation between Activities to
@@ -38,21 +40,20 @@ class HomeActivity : AppCompatActivity() {
         }
 
         cvLaLiga.setOnClickListener {
-            getLeagueStandings(it.context, Leagues.LIGA)
+            getLeagueStandings(it.context, LIGA)
         }
         cvPremierLeague.setOnClickListener {
-            getLeagueStandings(it.context, Leagues.PREMIER_LEAGUE)
+            getLeagueStandings(it.context, PREMIER_LEAGUE)
         }
         cvBundesliga.setOnClickListener {
-            getLeagueStandings(it.context, Leagues.BUNDESLIGA)
+            getLeagueStandings(it.context, BUNDESLIGA)
         }
         cvSerieA.setOnClickListener {
-            getLeagueStandings(it.context, Leagues.SERIE_A)
+            getLeagueStandings(it.context, SERIE_A)
         }
     }
 
     private fun getLeagueStandings(context: Context, league: String){
-        //startActivity(Intent(context, StandingsActivity::class.java).putExtra("league", league))
         router.goToStandingsView(context, league)
     }
 
@@ -65,7 +66,6 @@ class HomeActivity : AppCompatActivity() {
 
     private fun logOutUser(){
         firebaseAuth.signOut()
-        //startActivity(Intent(this, SignInActivity::class.java))
         router.goToSignInView(this@HomeActivity)
         finish()
     }
@@ -86,8 +86,6 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.logout ->{
                 logOutUser()
-                /*startActivity(Intent(this, SignInActivity::class.java))
-                finish()*/
             }
             R.id.settings -> {
                 Toast.makeText(this, "Working on this functionality", Toast.LENGTH_SHORT).show()

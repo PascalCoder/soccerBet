@@ -12,6 +12,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.thepascal.soccerstats.R
+import com.thepascal.soccerstats.constants.LeaguesConstants.DATE_TIME_PATTERN
+import com.thepascal.soccerstats.constants.LeaguesConstants.LEAGUE_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.MATCH_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.POSITION_EXTRA
+import com.thepascal.soccerstats.constants.LeaguesConstants.ROUND_ID_EXTRA
 import com.thepascal.soccerstats.data.Match
 import com.thepascal.soccerstats.data.MatchData
 import com.thepascal.soccerstats.view.activities.BetActivity
@@ -89,10 +94,10 @@ class TeamStatsAdapter(matchData: MatchData) : RecyclerView.Adapter<TeamStatsAda
             val match: Match = dataSet.matchList[holder.adapterPosition]
 
             val intent = Intent(this.context, BetActivity::class.java)
-            intent.putExtra("match", match)
-            intent.putExtra("league", TeamStatsActivity.mLeague)
-            intent.putExtra("round_id", match.identifier)
-            intent.putExtra("position", holder.adapterPosition)
+            intent.putExtra(MATCH_EXTRA, match)
+            intent.putExtra(LEAGUE_EXTRA, TeamStatsActivity.mLeague)
+            intent.putExtra(ROUND_ID_EXTRA, match.identifier)
+            intent.putExtra(POSITION_EXTRA, holder.adapterPosition)
 
             (this.context as Activity).startActivityForResult(intent, REQUEST_CODE)
         }
@@ -122,7 +127,7 @@ class TeamStatsAdapter(matchData: MatchData) : RecyclerView.Adapter<TeamStatsAda
     }
 
     private fun getDateFromString(dateStr: String?): Date {
-        val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US)
+        val parser = SimpleDateFormat(DATE_TIME_PATTERN, Locale.US)
         parser.timeZone = TimeZone.getDefault()
 
         lateinit var parsedDate: Date
