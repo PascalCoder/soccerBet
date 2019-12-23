@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SoccerBet</string>
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Password</string>
+    <string name="email_hint">Enter Email</string>
+    <string name="password_hint">Enter Password</string>
     <string name="sign_in_text">Sign In</string>
     <string name="sign_up_link">Need to Sign Up? Click Here</string>
     <string name="sign_up">Need to Sign Up? Click Here</string>
@@ -53,4 +53,9 @@
     <string name="bet_instruction">Choose a score for each team and click on submit to register your bet.</string>
     <string name="update_bet_text">Update Bet</string>
     <string name="sign_in_header">Enter your credentials to sign in!</string>
+
+    <string name="sign_in_blank_email">Please provide your email!</string>
+    <string name="sign_in_invalid_email">The provided email is not valid!</string>
+    <string name="sign_in_blank_password">Please enter your password!</string>
+
 </resources>

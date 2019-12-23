@@ -9,6 +9,7 @@ import com.thepascal.soccerstats.R
 import com.thepascal.soccerstats.isValidEmail
 import com.thepascal.soccerstats.router.Router
 import com.thepascal.soccerstats.router.RouterContract
+import com.thepascal.soccerstats.toast
 import kotlinx.android.synthetic.main.activity_password_reset.*
 
 class PasswordResetActivity : AppCompatActivity() {
@@ -34,31 +35,34 @@ class PasswordResetActivity : AppCompatActivity() {
             val email = etRecoverEmail.editText?.text.toString()
 
             //validate email
-            if (email.isBlank()){
-                etRecoverEmail.error = "Please provide your email. This field is required. You should provide something. Thanks!"
+            if (email.isBlank()) {
+                etRecoverEmail.error =
+                    "Please provide your email. This field is required. You should provide something. Thanks!"
                 etRecoverEmail.editText?.setHintTextColor(Color.parseColor("Gray"))
                 //return@setOnClickListener
-            }else if(email.isValidEmail()) {
+            } else if (email.isValidEmail()) {
                 etRecoverEmail.error = ""
                 //check if email exists in our database
                 //redirect user or display error if any
                 firebaseAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener {
-                        if(it.isSuccessful){
-                            Toast.makeText(this@PasswordResetActivity,
+                        if (it.isSuccessful) {
+                            this@PasswordResetActivity.toast(
                                 "A recovery link has been sent to your email.",
-                                Toast.LENGTH_LONG).show()
+                                Toast.LENGTH_LONG
+                            )
                             router.goToSignInView(this@PasswordResetActivity)
                             finish()
-                        }else{
-                            Toast.makeText(this@PasswordResetActivity,
+                        } else {
+                            this@PasswordResetActivity.toast(
                                 "This email was not recognized.",
-                                Toast.LENGTH_LONG).show()
+                                Toast.LENGTH_LONG
+                            )
                         }
                     }
 
                 //Toast.makeText(this@PasswordResetActivity, "Your email is valid :)", Toast.LENGTH_LONG).show()
-            }else{
+            } else {
                 etRecoverEmail.error = "Please check the format of your email."
             }
 

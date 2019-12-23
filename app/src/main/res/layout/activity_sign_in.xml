@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:id="@+id/etEmail"
+            android:id="@+id/signInEmail"
             android:layout_marginTop="50dp"
             android:hint="@string/email_hint"
             app:layout_constraintTop_toBottomOf="@id/signInHeader"
@@ -50,7 +50,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etPassword"
+            android:id="@+id/signInPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -62,7 +62,7 @@
             app:passwordToggleTint="@drawable/password_toggle_state"
             app:layout_constraintStart_toEndOf="@id/signInGuidelineLeft"
             app:layout_constraintEnd_toStartOf="@id/signInGuidelineRight"
-            app:layout_constraintTop_toBottomOf="@+id/etEmail">
+            app:layout_constraintTop_toBottomOf="@+id/signInEmail">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -74,7 +74,7 @@
 
         <Button
             style="@style/ButtonStyle"
-            android:id="@+id/btnLogin"
+            android:id="@+id/signInButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
@@ -85,7 +85,7 @@
             android:textAllCaps="false"
             app:layout_constraintStart_toEndOf="@id/signInGuidelineLeft"
             app:layout_constraintEnd_toStartOf="@id/signInGuidelineRight"
-            app:layout_constraintTop_toBottomOf="@+id/etPassword"/>
+            app:layout_constraintTop_toBottomOf="@+id/signInPassword"/>
 
         <TextView
             android:id="@+id/tvForgotPassword"
@@ -96,7 +96,7 @@
             android:layout_marginBottom="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+            app:layout_constraintTop_toBottomOf="@+id/signInButton"
             app:layout_constraintBottom_toTopOf="@+id/tvSignUpText"/>
 
         <TextView

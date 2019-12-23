@@ -10,6 +10,7 @@ import com.thepascal.soccerstats.constants.LeaguesConstants.ID_EXTRA
 import com.thepascal.soccerstats.constants.LeaguesConstants.TEAM_EXTRA
 import com.thepascal.soccerstats.data.MatchData
 import com.thepascal.soccerstats.data.RetrofitHelper
+import com.thepascal.soccerstats.toast
 import com.thepascal.soccerstats.view.adapter.TeamStatsAdapter
 import kotlinx.android.synthetic.main.activity_team_stats.*
 import retrofit2.Call
@@ -50,12 +51,15 @@ class TeamStatsActivity : ActivityWithMenu() {
                     if (response.body() != null) {
                         teamStatsRecyclerView.adapter = TeamStatsAdapter(response.body() as MatchData)
                         //Log.d("MatchData", (response.body() as MatchData).data.matchList[0].matchResult)
-                    } else
-                        Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
+                    } else {
+                        //Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
+                        toast("Something went wrong", Toast.LENGTH_LONG)
+                    }
                 }
 
                 override fun onFailure(call: Call<MatchData>, t: Throwable) {
-                    Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+                    toast(t.message, Toast.LENGTH_LONG)
                 }
 
             })

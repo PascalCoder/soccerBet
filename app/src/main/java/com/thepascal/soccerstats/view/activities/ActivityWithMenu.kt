@@ -3,7 +3,6 @@ package com.thepascal.soccerstats.view.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
@@ -11,6 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.thepascal.soccerstats.R
 import com.thepascal.soccerstats.router.Router
 import com.thepascal.soccerstats.router.RouterContract
+import com.thepascal.soccerstats.toast
 
 open class ActivityWithMenu : AppCompatActivity() {
 
@@ -47,20 +47,20 @@ open class ActivityWithMenu : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.myBets -> {
-                Toast.makeText(this, "Working on this functionality", Toast.LENGTH_SHORT).show()
+                toast("Working on this functionality")
             }
 
             R.id.myAccount -> {
-                Toast.makeText(this, "Working on this functionality", Toast.LENGTH_SHORT).show()
+                toast("Working on this functionality")
             }
             R.id.logout -> {
                 logOutUser()
             }
             R.id.settings -> {
-                Toast.makeText(this, "Working on this functionality", Toast.LENGTH_SHORT).show()
+                toast("Working on this functionality")
             }
             R.id.refresh -> {
-                Toast.makeText(this, "Working on this functionality", Toast.LENGTH_SHORT).show()
+                toast("Working on this functionality")
             }
         }
         return super.onOptionsItemSelected(item)

@@ -6,12 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
-import com.thepascal.soccerstats.R
-import com.thepascal.soccerstats.SignUpListener
+import com.thepascal.soccerstats.*
 import com.thepascal.soccerstats.constants.LeaguesConstants.GAMER_PATH_STRING
 import com.thepascal.soccerstats.data.Gamer
-import com.thepascal.soccerstats.isValidEmail
-import com.thepascal.soccerstats.isValidPassword
 import com.thepascal.soccerstats.router.Router
 import com.thepascal.soccerstats.router.RouterContract
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -71,17 +68,17 @@ class SignUpActivity : AppCompatActivity(), SignUpListener {
         if (etEmailSU.editText?.text.toString().isValidEmail()) {
             return if (etPasswordSU.editText?.text.toString().isValidPassword()) { //etPasswordSU.text.toString() != "" || etPasswordSU.text.toString() != null
                 if (etPasswordSU.editText?.text.toString() != etPasswordConfirm.editText?.text.toString()) {
-                    Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                    toast("Passwords do not match")
                     false
                 }else{
                     true
                 }
             }else{
-                Toast.makeText(this, "Password is not valid!", Toast.LENGTH_SHORT).show()
+                toast("Password is not valid!")
                 false
             }
         } else {
-            Toast.makeText(this, "Email is not valid!", Toast.LENGTH_SHORT).show()
+            toast("Email is not valid!")
             return false
         }
 

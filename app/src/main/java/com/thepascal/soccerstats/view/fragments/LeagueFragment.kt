@@ -11,13 +11,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.thepascal.soccerstats.Leagues
-
 import com.thepascal.soccerstats.R
 import com.thepascal.soccerstats.constants.LeaguesConstants.CURRENT_SEASON
 import com.thepascal.soccerstats.constants.LeaguesConstants.LEAGUE_EXTRA
 import com.thepascal.soccerstats.data.RetrofitHelper
 import com.thepascal.soccerstats.data.StandingsData
+import com.thepascal.soccerstats.toast
 import com.thepascal.soccerstats.view.adapter.StandingsAdapter
 import kotlinx.android.synthetic.main.fragment_league.view.*
 import retrofit2.Call
@@ -54,7 +53,7 @@ class LeagueFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Toast.makeText(context, "Just attached!! $league", Toast.LENGTH_LONG).show()
+        context.toast("Just attached!! $league", Toast.LENGTH_LONG)
     }
 
     private fun getLeagueStandings() {
@@ -66,7 +65,7 @@ class LeagueFragment : Fragment() {
                         Log.d("LeagueFragment", (response.body() as StandingsData).standingList.standings[0].team)
                         recyclerView.adapter = StandingsAdapter(response.body() as StandingsData)
                     } else {
-                        Toast.makeText(context, "Data seems to be empty!", Toast.LENGTH_SHORT).show()
+                        context?.toast("Data seems to be empty!", Toast.LENGTH_SHORT)
                     }
                 }
 

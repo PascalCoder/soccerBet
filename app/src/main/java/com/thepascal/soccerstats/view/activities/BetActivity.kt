@@ -13,6 +13,7 @@ import com.thepascal.soccerstats.constants.LeaguesConstants.LEAGUE_EXTRA
 import com.thepascal.soccerstats.constants.LeaguesConstants.MATCH_EXTRA
 import com.thepascal.soccerstats.data.Bet
 import com.thepascal.soccerstats.data.Match
+import com.thepascal.soccerstats.toast
 import kotlinx.android.synthetic.main.activity_bet.*
 
 class BetActivity : ActivityWithMenu() {
@@ -36,7 +37,7 @@ class BetActivity : ActivityWithMenu() {
         //let's get the bets if any
         retrieveBets()
 
-        Toast.makeText(this, "size: ${mBets.size}", Toast.LENGTH_LONG).show()
+        toast("size: ${mBets.size}", Toast.LENGTH_LONG)
 
         //setting the toolbar
         setUpToolbar()
