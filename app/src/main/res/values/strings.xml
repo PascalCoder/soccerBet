@@ -58,4 +58,23 @@
     <string name="sign_in_invalid_email">The provided email is not valid!</string>
     <string name="sign_in_blank_password">Please enter your password!</string>
 
+    <string name="sign_up_blank_username">Please provide a username.</string>
+    <string name="sign_up_invalid_username">The username is invalid.
+        The username has to be at least 4 characters long and contain a combination of uppercase, lowercase and/or digit.
+    </string>
+    <string name="sign_up_blank_email">Please provide an email.</string>
+    <string name="sign_up_invalid_email">Please enter a valid email.</string>
+    <string name="sign_up_blank_password">Please enter a password.</string>
+    <string name="sign_up_invalid_password">Invalid password.
+        The password must be at least 8 characters long and contain three of the following:
+        an upper case, a lower case or a digit. Special characters are allowed.
+    </string>
+    <string name="sign_up_password_not_matching">Please enter the same password.</string>
+    <string name="reset_password_header">Please enter your email below to reset your password</string>
+    <string name="reset_password_email_blank_error">Please provide your email. This field is required.</string>
+    <string name="reset_password_email_error">This email was not recognized.</string>
+    <string name="reset_password_recovery_email_sent">A recovery link has been sent to your email.</string>
+    <string name="reset_password_email_invalid">Please check the format of your email.</string>
+    <string name="sign_up_success_msg">Sign up was successful!</string>
+
 </resources>

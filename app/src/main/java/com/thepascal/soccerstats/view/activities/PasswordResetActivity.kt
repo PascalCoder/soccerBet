@@ -1,20 +1,24 @@
 package com.thepascal.soccerstats.view.activities
 
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.thepascal.soccerstats.R
-import com.thepascal.soccerstats.isValidEmail
+import com.thepascal.soccerstats.interactors.PasswordResetInteractor
+import com.thepascal.soccerstats.interactors.PasswordResetInteractorContract
+import com.thepascal.soccerstats.presenters.PasswordResetPresenter
 import com.thepascal.soccerstats.router.Router
 import com.thepascal.soccerstats.router.RouterContract
+import com.thepascal.soccerstats.showError
 import com.thepascal.soccerstats.toast
 import kotlinx.android.synthetic.main.activity_password_reset.*
 
-class PasswordResetActivity : AppCompatActivity() {
+class PasswordResetActivity : AppCompatActivity(), PasswordResetContract {
 
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var passwordResetInteractor: PasswordResetInteractorContract
 
     //Using router for the navigation between Activities to
     //satisfy the separation of concern
@@ -23,50 +27,45 @@ class PasswordResetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_password_reset)
-        //supportActionBar?.hide()
-        //setSupportActionBar(resetPasswordToolbar)
-        supportActionBar?.title = getString(R.string.reset_password_text)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        passwordResetInteractor = PasswordResetInteractor(PasswordResetPresenter(this))
+
+        setUpToolbar()
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        btnResetPassword.setOnClickListener {
-
-            val email = etRecoverEmail.editText?.text.toString()
-
-            //validate email
-            if (email.isBlank()) {
-                etRecoverEmail.error =
-                    "Please provide your email. This field is required. You should provide something. Thanks!"
-                etRecoverEmail.editText?.setHintTextColor(Color.parseColor("Gray"))
-                //return@setOnClickListener
-            } else if (email.isValidEmail()) {
-                etRecoverEmail.error = ""
-                //check if email exists in our database
-                //redirect user or display error if any
-                firebaseAuth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            this@PasswordResetActivity.toast(
-                                "A recovery link has been sent to your email.",
-                                Toast.LENGTH_LONG
-                            )
-                            router.goToSignInView(this@PasswordResetActivity)
-                            finish()
-                        } else {
-                            this@PasswordResetActivity.toast(
-                                "This email was not recognized.",
-                                Toast.LENGTH_LONG
-                            )
-                        }
-                    }
-
-                //Toast.makeText(this@PasswordResetActivity, "Your email is valid :)", Toast.LENGTH_LONG).show()
-            } else {
-                etRecoverEmail.error = "Please check the format of your email."
-            }
-
+        passwordResetButton.setOnClickListener {
+            passwordResetInteractor.sendRecoveryEmail(passwordResetEmail.editText?.text.toString())
         }
     }
 
+    override fun onSuccess(email: String) {
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    this@PasswordResetActivity.toast(
+                        getString(R.string.reset_password_recovery_email_sent),
+                        Toast.LENGTH_LONG
+                    )
+                    router.goToSignInView(this@PasswordResetActivity)
+                    finish()
+                } else {
+                    this@PasswordResetActivity.toast(
+                        getString(R.string.reset_password_email_error),
+                        Toast.LENGTH_LONG
+                    )
+                }
+            }
+    }
+
+    override fun onFailure(passwordResetError: Int) {
+        passwordResetEmail.showError(passwordResetError)
+    }
+
+    private fun setUpToolbar() {
+
+        setSupportActionBar(resetPasswordToolbar as Toolbar)
+        supportActionBar?.title = getString(R.string.reset_password_text)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 }

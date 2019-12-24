@@ -5,5 +5,7 @@ enum class FormErrors {
     EmailEmpty,
     PasswordInvalid,
     PasswordNotMatching,
-    PasswordEmpty
+    PasswordEmpty,
+    UsernameEmpty,
+    UsernameInvalid
 }
